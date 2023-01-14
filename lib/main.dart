@@ -17,6 +17,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
+        buttonTheme: const ButtonThemeData(
+          buttonColor: Colors.deepPurpleAccent,
+        ),
       ),
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.system,

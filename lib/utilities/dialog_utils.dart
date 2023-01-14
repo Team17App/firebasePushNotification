@@ -51,52 +51,88 @@ class DialogUtils {
       text: source,
     );
 
+    final size = MediaQuery.of(context).size;
+
     return showDialog(
       context: context,
       barrierColor: Colors.black45,
       builder: (context) => Scaffold(
         backgroundColor: Colors.black45,
-        body: Center(
+        body: Container(
+          constraints: BoxConstraints(
+            maxHeight: size.width > 650 ? 600 : size.width,
+          ),
+          padding: const EdgeInsets.all(20.0),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // code
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: CodeField(
-                  controller: codeController,
-                  readOnly: true,
-                  textStyle: const TextStyle(fontFamily: 'SourceCodePro'),
-                ),
-              ),
-              const SizedBox(height: 20),
-              // send
-              GestureDetector(
-                child: Container(
-                  width: double.maxFinite,
-                  height: 50.0,
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.all(10.0),
-                  margin: const EdgeInsets.all(10.0),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.circular(10.0),
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                // code
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: CodeField(
+                    controller: codeController,
+                    readOnly: true,
+                    textStyle: const TextStyle(fontFamily: 'SourceCodePro'),
                   ),
-                  child: const Text(
-                    'Send',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                ),
+                const SizedBox(height: 20),
+                Row(children: [
+                  // cancel
+                  Expanded(
+                    child: GestureDetector(
+                      child: Container(
+                        width: double.maxFinite,
+                        height: 50.0,
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.all(10.0),
+                        margin: const EdgeInsets.all(10.0),
+                        decoration: BoxDecoration(
+                          color: Colors.redAccent,
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: const Text(
+                          'CANCEL',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        onPressed();
+                      },
                     ),
                   ),
-                ),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  onPressed();
-                },
-              ),
-            ],
-          ),
+                  // send
+                  Expanded(
+                    child: GestureDetector(
+                      child: Container(
+                        width: double.maxFinite,
+                        height: 50.0,
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.all(10.0),
+                        margin: const EdgeInsets.all(10.0),
+                        decoration: BoxDecoration(
+                          color: Colors.green,
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: const Text(
+                          'SEND',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        onPressed();
+                      },
+                    ),
+                  ),
+                ]),
+              ]),
         ),
       ),
     );
