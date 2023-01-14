@@ -51,17 +51,12 @@ class DialogUtils {
       text: source,
     );
 
-    final size = MediaQuery.of(context).size;
-
     return showDialog(
       context: context,
       barrierColor: Colors.black45,
       builder: (context) => Scaffold(
         backgroundColor: Colors.black45,
-        body: Container(
-          constraints: BoxConstraints(
-            maxHeight: size.width > 650 ? 600 : size.width,
-          ),
+        body: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
               mainAxisSize: MainAxisSize.max,
